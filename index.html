@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Müşteri Avcısı</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,-apple-system,BlinkMacSystemFont,sans-serif;background:#f4f7fb;color:#111827}
+.header{background:#0f172a;color:white;padding:16px;position:sticky;top:0;z-index:2}
+.header h1{margin:0;font-size:20px}
+.header p{margin:5px 0 0;color:#cbd5e1;font-size:13px}
+.container{padding:14px 14px 90px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:white;border:1px solid #e5e7eb;border-radius:18px;padding:15px;box-shadow:0 4px 14px rgba(15,23,42,.06)}
+.icon{font-size:25px}
+.card h3{font-size:15px;margin:8px 0;min-height:36px}
+.num{font-size:30px;font-weight:800}
+.small{color:#64748b;font-size:13px}
+.btn{background:#2563eb;color:white;border:0;border-radius:12px;padding:11px 13px;font-weight:700;margin-top:10px;width:100%}
+.panel{background:white;border:1px solid #e5e7eb;border-radius:18px;padding:16px;margin-bottom:12px}
+.panel h2{margin:0 0 10px;font-size:20px}
+.lead{background:white;border:1px solid #e5e7eb;border-radius:16px;padding:14px;margin-bottom:10px}
+.lead h3{margin:0 0 8px;font-size:16px}
+.lead p{margin:0 0 8px;color:#334155}
+.badge{display:inline-block;background:#dcfce7;color:#15803d;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}
+.reply{background:#ecfdf5;border:1px solid #86efac;border-radius:14px;padding:13px;line-height:1.45;margin:10px 0}
+input,textarea{width:100%;border:1px solid #dbe3ef;border-radius:12px;padding:12px;margin:6px 0 12px;font-size:15px}
+label{font-size:13px;font-weight:800;color:#475569}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:white;border-top:1px solid #e5e7eb;display:grid;grid-template-columns:repeat(4,1fr);padding:8px;z-index:3}
+.bottom button{background:white;border:0;font-size:12px;color:#0f172a}
+.bottom span{display:block;font-size:22px;margin-bottom:2px}
+.hidden{display:none}
+@media(min-width:800px){.container{max-width:1100px;margin:auto}.grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>📍 Müşteri Avcısı</h1>
+<p>İzmir müşteri adayı takip paneli</p>
+</div>
+
+<div id="home" class="container">
+<div class="grid">
+<div class="card"><div class="icon">👥</div><h3>Facebook Grupları</h3><div class="num">7</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Facebook Grupları')">Görüntüle</button></div>
+<div class="card"><div class="icon">📘</div><h3>Facebook Sayfaları</h3><div class="num">3</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Facebook Sayfaları')">Görüntüle</button></div>
+<div class="card"><div class="icon">📸</div><h3>Instagram</h3><div class="num">4</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Instagram')">Görüntüle</button></div>
+<div class="card"><div class="icon">🎵</div><h3>TikTok</h3><div class="num">2</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('TikTok')">Görüntüle</button></div>
+<div class="card"><div class="icon">𝕏</div><h3>X / Twitter</h3><div class="num">2</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('X / Twitter')">Görüntüle</button></div>
+<div class="card"><div class="icon">🔎</div><h3>Google Arama</h3><div class="num">8</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Google Arama')">Görüntüle</button></div>
+<div class="card"><div class="icon">🗺️</div><h3>Google Maps</h3><div class="num">5</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Google Maps')">Görüntüle</button></div>
+<div class="card"><div class="icon">🌸</div><h3>Kadın Toplulukları</h3><div class="num">9</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Kadın Toplulukları')">Görüntüle</button></div>
+<div class="card"><div class="icon">🍼</div><h3>Anne / Bebek Forumları</h3><div class="num">6</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Anne / Bebek Forumları')">Görüntüle</button></div>
+<div class="card"><div class="icon">🏘️</div><h3>Mahalle Grupları</h3><div class="num">5</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Mahalle Grupları')">Görüntüle</button></div>
+<div class="card"><div class="icon">✈️</div><h3>Telegram Grupları</h3><div class="num">2</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('Telegram Grupları')">Görüntüle</button></div>
+<div class="card"><div class="icon">💬</div><h3>WhatsApp İzinli Gruplar</h3><div class="num">2</div><div class="small">Yeni müşteri</div><button class="btn" onclick="showList('WhatsApp Grupları')">Görüntüle</button></div>
+</div>
+</div>
+
+<div id="list" class="container hidden"></div>
+<div id="detail" class="container hidden"></div>
+<div id="settings" class="container hidden">
+<div class="panel">
+<h2>⚙️ Firma Ayarları</h2>
+<label>Firma Adı</label><input value="Yasemin Halı Yıkama">
+<label>Şehir</label><input value="İzmir">
+<label>Telefon</label><input placeholder="Telefon gir">
+<label>WhatsApp</label><input placeholder="WhatsApp numarası">
+<button class="btn" onclick="alert('Kaydedildi')">Kaydet</button>
+</div>
+<div class="panel">
+<h2>Hizmet Kelimeleri</h2>
+<textarea rows="4">halı yıkama, koltuk yıkama, stor perde yıkama, yorgan yıkama, battaniye yıkama, tavsiye, öneri, fiyat, güvenilir</textarea>
+</div>
+</div>
+
+<div id="api" class="container hidden">
+<div class="panel">
+<h2>🔑 API Bağlantıları</h2>
+<label>OpenAI API</label><input type="password" placeholder="API anahtarı">
+<label>Telegram Bot Token</label><input type="password" placeholder="Token">
+<label>Google API</label><input type="password" placeholder="Google API">
+<label>Meta / Facebook Token</label><input type="password" placeholder="Meta token">
+<label>X API Token</label><input type="password" placeholder="X token">
+<label>TikTok API</label><input type="password" placeholder="TikTok">
+<label>YouTube API</label><input type="password" placeholder="YouTube">
+<label>WhatsApp Business API</label><input type="password" placeholder="WhatsApp">
+<button class="btn" onclick="alert('API bilgileri kaydedildi')">Bağlantıları Kaydet</button>
+</div>
+</div>
+
+<div class="bottom">
+<button onclick="showHome()"><span>🏠</span>Panel</button>
+<button onclick="showList('Tüm Adaylar')"><span>🔥</span>Adaylar</button>
+<button onclick="showSettings()"><span>⚙️</span>Ayarlar</button>
+<button onclick="showApi()"><span>🔑</span>API</button>
+</div>
+
+<script>
+var sampleLeads = [
+ {p:'Kadın Toplulukları',s:'Kadınlar Kulübü',t:'Buca’da halı yıkama tavsiyesi olan var mı?',m:'Buca Fırat Mahallesi civarında memnun kaldığınız firma var mı?',d:'Buca'},
+ {p:'Facebook Grupları',s:'Buca Anneler Grubu',t:'Koltuk yıkama için öneri lazım',m:'Çocuklardan dolayı koltuklar çok kirlendi, güvenilir yer arıyorum.',d:'Buca'},
+ {p:'Google Maps',s:'Rakip Firma Yorumu',t:'Halılar geç geldi',m:'3 gündür teslim edilmedi, başka firma önerisi olan var mı?',d:'Karşıyaka'},
+ {p:'X / Twitter',s:'@izmirli_anne',t:'İzmir’de stor perde yıkama fiyatı?',m:'Stor perde yıkatacağım. Uygun ve temiz yapan var mı?',d:'İzmir'},
+ {p:'WhatsApp Grupları',s:'Site Yönetimi B Blok',t:'Toplu halı yıkama indirimi',m:'Apartmanda toplu halı yıkama yaptırmak isteyenler var.',d:'Bornova'}
+];
+
+function hideAll(){
+ document.getElementById('home').className='container hidden';
+ document.getElementById('list').className='container hidden';
+ document.getElementById('detail').className='container hidden';
+ document.getElementById('settings').className='container hidden';
+ document.getElementById('api').className='container hidden';
+}
+function showHome(){hideAll();document.getElementById('home').className='container';}
+function showSettings(){hideAll();document.getElementById('settings').className='container';}
+function showApi(){hideAll();document.getElementById('api').className='container';}
+function showList(platform){
+ hideAll();
+ var list=document.getElementById('list');
+ list.className='container';
+ var html='<div class="panel"><h2>'+platform+'</h2><p class="small">Bulunan sıcak müşteri adayları</p></div>';
+ for(var i=0;i<sampleLeads.length;i++){
+   var x=sampleLeads[i];
+   if(platform==='Tüm Adaylar' || x.p===platform || platform.indexOf('Facebook')>=0 && x.p.indexOf('Facebook')>=0){
+     html+='<div class="lead"><h3>'+x.t+'</h3><p>'+x.m+'</p><span class="badge">Sıcak</span><p class="small">'+x.p+' • '+x.s+' • '+x.d+'</p><button class="btn" onclick="showDetail('+i+')">Aç</button></div>';
+   }
+ }
+ list.innerHTML=html;
+}
+function showDetail(i){
+ hideAll();
+ var x=sampleLeads[i];
+ var reply='Merhaba, '+x.d+' ve çevresinde halı, koltuk, yorgan, battaniye ve stor perde yıkama hizmetimiz var. Ücretsiz servis imkânımız bulunuyor. İsterseniz ölçüye göre fiyat bilgisi paylaşabilirim.';
+ document.getElementById('detail').className='container';
+ document.getElementById('detail').innerHTML='<div class="panel"><h2>Mesaj Detayı</h2><p><b>Platform:</b> '+x.p+'</p><p><b>Kaynak:</b> '+x.s+'</p><p><b>Bölge:</b> '+x.d+'</p></div><div class="panel"><h2>'+x.t+'</h2><p>'+x.m+'</p><h3>Hazır Cevap</h3><div class="reply" id="reply">'+reply+'</div><button class="btn" onclick="copyReply()">Cevabı Kopyala</button><button class="btn" onclick="alert(\'Link açılacak\')">Linke Git</button><button class="btn" onclick="alert(\'Cevaplandı işaretlendi\')">Cevaplandı</button></div>';
+}
+function copyReply(){
+ var text=document.getElementById('reply').innerText;
+ if(navigator.clipboard){navigator.clipboard.writeText(text);}
+ alert('Cevap kopyalandı');
+}
+showHome();
+</script>
+</body>
+</html>
